@@ -1,4 +1,4 @@
-module mcp-cli
+module github.com/winterfx/mcpcli
 
 go 1.24.0
 
