@@ -56,8 +56,8 @@ total 21 tools
 
 | NAME | DESCRIPTION | PARAMETERS |
 |------|------------|------------|
-| browser_close | Close the page | { "type": "object", "properties": {} } |
-| browser_wait | Wait for a specified time in seconds | { "type": "object", "properties": { "time": { "description": "The time to wait in seconds", "type": "number" } }, "required": ["time"] } |
+| browser_close | Close the page | `{"type": "object", "properties": {}}` |
+| browser_wait | Wait for a specified time in seconds | `{"type": "object", "properties": {"time": {"description": "The time to wait in seconds", "type": "number"}}, "required": ["time"]}` |
 
 ### Interactive Commands
 ```bash
