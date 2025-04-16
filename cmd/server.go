@@ -6,10 +6,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"mcp-cli/service"
 	"os"
 	"sort"
 	"strings"
+
+	"github.com/winterfx/mcpcli/service"
 
 	"github.com/chzyer/readline"
 	"github.com/jedib0t/go-pretty/v6/table"
@@ -228,7 +229,7 @@ func toolsView(tools []mcp.Tool) {
 	nameWidth := width / 5
 	descWidth := width / 5
 	paramWidth := width / 3 // Parameters get more space
-	fmt.Printf("width: %d, nameWidth: %d, descWidth: %d, paramWidth: %d\n", width, nameWidth, descWidth, paramWidth)
+	fmt.Printf("total %d tools\n", len(tools))
 	for _, tool := range tools {
 		params, err := json.MarshalIndent(tool.InputSchema, "", "··")
 		if err != nil {

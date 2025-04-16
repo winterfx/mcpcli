@@ -1,60 +1,77 @@
 # MCP-CLI
 
-MCP-CLI 是一个用于管理和调用 MCP 服务器的命令行工具。
+MCP-CLI is a command-line tool for managing and interacting with MCP (Machine Conversation Protocol) servers.
 
-## 功能特性
+## Features
 
-- 管理多个 MCP 服务器
-- 交互式命令行界面
-- 支持查看和调用服务器工具(Tools)
-- 支持查看服务器提示(Prompts)和资源(Resources)
-- 支持 tool的调用
+- Manage multiple MCP servers
+- Interactive command-line interface
+- Support for viewing and calling server Tools
+- Support for viewing server Prompts and Resources
+- Support for tool invocation
 
-## 安装
+## Installation
 ```bash
-go install github.com/winterfx/mcp-cli@latest
+go install github.com/yourusername/mcp-cli@latest
 ```
 
-## 配置
+## Configuration
 
-创建配置文件 `~/.mcp-cli.json`:
+Create configuration file `~/.mcp-cli.json`:
 
 ```json
 {
   "mcpServers": {
-    "server1": {
-      "command": "/path/to/server",
-      "args": ["--arg1", "--arg2"],
-      "env": {
-        "KEY": "value"
-      }
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
     }
+    ...
   }
 }
 ```
 
-## 使用方法
+## Usage
 
-基本命令:
-
+### List All Servers
 ```bash
-# 列出所有服务器
-mcp-cli server list
-
-# 检查特定服务器
-mcp-cli server inspect -n server1
+$ mcp-cli server list
 ```
 
-交互式命令:
+| Server Name | Command | Args | Environment |
+|------------|---------|------|-------------|
+| playwright | npx | @playwright/mcp@latest | |
+
+### Inspect Server
 ```bash
-> tools     # 显示可用工具
-> prompts   # 显示可用提示
-> resources # 显示可用资源
-> call tool-name {"param": "value"}  # 调用工具
-> help      # 显示帮助信息
-> exit      # 退出
+$ ./mcp-cli server inspect -n playwright
+Inspecting server: {Command:npx Args:[@playwright/mcp@latest] Env:map[]}
+Initializing MCP client...
+Entering interactive shell for server: playwright
+Type 'help' for available commands, 'exit' to quit
+
+playwright> tools
+total 21 tools
 ```
 
-## 许可证
+| NAME | DESCRIPTION | PARAMETERS |
+|------|------------|------------|
+| browser_close | Close the page | { "type": "object", "properties": {} } |
+| browser_wait | Wait for a specified time in seconds | { "type": "object", "properties": { "time": { "description": "The time to wait in seconds", "type": "number" } }, "required": ["time"] } |
+
+### Interactive Commands
+```bash
+> tools     # Show available tools
+> prompts   # Show available prompts
+> resources # Show available resources
+> call tool-name {"param": "value"}  # Call a tool
+> help      # Show help information
+> exit      # Exit
+```
+
+### Tool Call Example
+![](./doc/tool.png)
+
+## License
 
 MIT License

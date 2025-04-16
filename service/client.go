@@ -24,14 +24,6 @@ func CreateClient(ctx context.Context, server *McpServer) (*client.StdioMCPClien
 	if err != nil {
 		return nil, fmt.Errorf("failed to create MCP client: %w", err)
 	}
-	//print c.stderr
-	reader := c.Stderr()
-	buff := make([]byte, 1024)
-	n, err := reader.Read(buff)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read from stderr: %w", err)
-	}
-	fmt.Println(string(buff[:n]))
 	ctx, cancel := context.WithTimeout(context.Background(), startClientTimeout)
 	defer cancel()
 	initRequest := mcp.InitializeRequest{}

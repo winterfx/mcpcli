@@ -2,9 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"mcp-cli/service"
 	"os"
 	"path/filepath"
+
+	"github.com/winterfx/mcpcli/service"
 
 	"github.com/spf13/cobra"
 )

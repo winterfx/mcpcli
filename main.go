@@ -1,6 +1,6 @@
 package main
 
-import "mcp-cli/cmd"
+import "github.com/winterfx/mcpcli/cmd"
 
 func main() {
 	// Execute the root command
