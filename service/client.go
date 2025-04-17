@@ -12,7 +12,7 @@ import (
 
 const startClientTimeout = 15 * time.Second
 
-func CreateClient(ctx context.Context, server *McpServer) (*client.StdioMCPClient, error) {
+func CreateClient(ctx context.Context, server *McpServer) (*client.Client, error) {
 	var env []string
 	for k, v := range server.Env {
 		env = append(env, fmt.Sprintf("%s=%s", k, v))
@@ -42,7 +42,7 @@ func CreateClient(ctx context.Context, server *McpServer) (*client.StdioMCPClien
 	return c, nil
 }
 
-func RetrieveTools(ctx context.Context, c *client.StdioMCPClient) ([]mcp.Tool, error) {
+func RetrieveTools(ctx context.Context, c *client.Client) ([]mcp.Tool, error) {
 	tools, err := c.ListTools(ctx, mcp.ListToolsRequest{})
 	if err != nil {
 		err := parseMcpError(err)
@@ -55,7 +55,7 @@ func RetrieveTools(ctx context.Context, c *client.StdioMCPClient) ([]mcp.Tool, e
 	return tools.Tools, nil
 }
 
-func RetrievePrompts(ctx context.Context, c *client.StdioMCPClient) ([]mcp.Prompt, error) {
+func RetrievePrompts(ctx context.Context, c *client.Client) ([]mcp.Prompt, error) {
 	p, err := c.ListPrompts(ctx, mcp.ListPromptsRequest{})
 	if err != nil {
 		err := parseMcpError(err)
@@ -69,7 +69,7 @@ func RetrievePrompts(ctx context.Context, c *client.StdioMCPClient) ([]mcp.Promp
 	return p.Prompts, nil
 }
 
-func RetrieveResources(ctx context.Context, c *client.StdioMCPClient) ([]mcp.Resource, error) {
+func RetrieveResources(ctx context.Context, c *client.Client) ([]mcp.Resource, error) {
 	r, err := c.ListResources(ctx, mcp.ListResourcesRequest{})
 	if err != nil {
 		err := parseMcpError(err)
@@ -82,7 +82,7 @@ func RetrieveResources(ctx context.Context, c *client.StdioMCPClient) ([]mcp.Res
 	return r.Resources, nil
 }
 
-func CallTool(ctx context.Context, c *client.StdioMCPClient, toolName string, argsMap map[string]any) (*mcp.CallToolResult, error) {
+func CallTool(ctx context.Context, c *client.Client, toolName string, argsMap map[string]any) (*mcp.CallToolResult, error) {
 	request := mcp.CallToolRequest{}
 	request.Params.Name = toolName
 	request.Params.Arguments = argsMap
